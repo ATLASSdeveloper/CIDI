@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: Deploy to Vercel if Tests Pass
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  test_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with Cypress
+        id: cypress-tests
+        run: |
+          npx cypress run --headless
 
       - name: Deploy to Vercel
-        if: success()
+        if: ${{ steps.cypress-tests.outcome == 'success' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
