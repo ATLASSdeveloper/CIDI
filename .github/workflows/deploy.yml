@@ -46,8 +46,8 @@ jobs:
           echo "Cypress exit code: $CYPRESS_EXIT_CODE"
           if [ $CYPRESS_EXIT_CODE -eq 0 ]; then
             echo "Cypress tests passed. Exiting with code 0."
-            exit 1
+            exit 0
           else
             echo "Cypress tests failed. Exiting with code 1."
-            exit 0
+            exit 1
           fi
