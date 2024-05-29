@@ -30,6 +30,10 @@ jobs:
         if: ${{ steps.cypress-tests.outcome == 'success' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }} # Agrega la URL del Deploy Hook como una secret
         run: |
           npm install -g vercel
           vercel --prod --token $VERCEL_TOKEN
+          
+          # Después de desplegar, activa el Deploy Hook en Vercel usando una solicitud HTTP POST
+          curl -X POST $DEPLOY_HOOK_URL
