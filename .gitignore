@@ -14302,12 +14302,6 @@ node_modules/unicode-property-aliases-ecmascript/index.js
 node_modules/unicode-property-aliases-ecmascript/LICENSE-MIT.txt
 node_modules/unicode-property-aliases-ecmascript/package.json
 node_modules/unicode-property-aliases-ecmascript/README.md
-cypress.config.js
-cypress/support/e2e.js
-cypress/support/component.js
-cypress/support/component-index.html
-cypress/support/commands.js
-cypress/fixtures/example.json
 node_modules/.bin/cypress
 node_modules/.bin/cypress.cmd
 node_modules/.bin/cypress.ps1
