@@ -25,8 +25,6 @@ jobs:
         id: cypress-tests
         run: |
           npx cypress run --headless
-          # Guarda el estado de salida de Cypress en una variable
-          export CYPRESS_EXIT_CODE=$?
 
       - name: Deploy to Vercel
         if: ${{ steps.cypress-tests.outcome == 'success' }}
@@ -39,15 +37,3 @@ jobs:
           
           # Después de desplegar, activa el Deploy Hook en Vercel usando una solicitud HTTP POST
           curl -X POST $DEPLOY_HOOK_URL
-
-      - name: Check Cypress exit code
-        if: ${{ steps.cypress-tests.outcome == 'success' }}
-        run: |
-          echo "Cypress exit code: $CYPRESS_EXIT_CODE"
-          if [ $CYPRESS_EXIT_CODE -eq 0 ]; then
-            echo "Cypress tests passed. Exiting with code 0."
-            exit 0
-          else
-            echo "Cypress tests failed. Exiting with code 1."
-            exit 1
-          fi
